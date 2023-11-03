@@ -3,6 +3,7 @@ import torch
 from sklearn.decomposition import PCA
 import lsqfit
 from data import get_nuclear_data, semi_empirical_mass_formula, BW_mass_formula
+from pysr import PySRRegressor
 
 def preds_targets_zn(model, data, task_name, train=True, val=True):
     # the data has an admittedly weird structure
@@ -138,7 +139,7 @@ def PCA_fit(X, y, fit_func, n_pol):
   # prior = {"a": gvar.gvar([0.065], [0.1])}      
   
   if fit_func == polynomial:
-      p0 = {"a": [0.1]*(n_pol+1)}
+      p0 = {"a": [0.4]*(n_pol+1)}
   elif fit_func == envelope:                 
       p0 = {"A": [2*10**(-4)], "x0": [70], "B": [0.35], "f":[0.2], "y0":[0.8]}
   

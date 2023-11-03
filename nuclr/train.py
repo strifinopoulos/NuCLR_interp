@@ -47,7 +47,7 @@ class Trainer:
         trainer = cls(args)
         for fold in model_paths:
             trainer.models[fold].load_state_dict(
-                torch.load(model_paths[fold])
+                torch.load(model_paths[fold], map_location=torch.device('cpu'))
             )
         trainer.log = False
         return trainer

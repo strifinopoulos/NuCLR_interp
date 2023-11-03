@@ -9,7 +9,7 @@ import torch
 import argparse
 import warnings
 from collections import namedtuple, OrderedDict
-from lib.config_utils import DATA_DIR
+from config_utils import DATA_DIR
 
 def delta(Z, N):
     A = Z + N
@@ -102,9 +102,8 @@ def BW2_mass_formula(Z, N):
     return Eb / A * 1000  # keV
 
 
-def WS4_mass_formula(min_included_nucl):
+def WS4_mass_formula(df, min_included_nucl):
     
-    df = get_nuclear_data(False)
     df = df[
         (df.z > min_included_nucl) & (df.n > min_included_nucl)
     ]
@@ -257,7 +256,7 @@ def get_stability_from(string):
 
 @apply_to_df_col("isospin")
 def get_isospin_from(string):
-    return float(eval(string.replace(" ", "float('nan')")))
+    return float(eval(string.replace(" ", "nan"), {"nan": float('nan')}))
 
 
 def get_binding_energy_from(df):
@@ -281,7 +280,7 @@ def get_targets(df):
     # binding energy per nucleon minus semi empirical mass formula (including shell effects)
     targets["binding_BW2"] = targets.binding - BW2_mass_formula(df.z, df.n)
     # binding energy per nucleon minus WS4 formula
-    targets["binding_WS4"] = targets.binding - WS4_mass_formula(df)
+    targets["binding_WS4"] = targets.binding - WS4_mass_formula(df, 0)
     # radius in fm
     targets["radius"] = get_radius_from(df)
     # half life in log10(sec)
