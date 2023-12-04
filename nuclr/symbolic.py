@@ -1,5 +1,6 @@
 from pysr import PySRRegressor
-
+# sys.path.append(r'C:\Users\gorth\Dropbox (MIT)\Shared\Papers\AI for nuclear\ai-nuclear-nn_test_long_run\lib')
+ 
 def pysr_fit(X,y):
 
     model_pysr = PySRRegressor(
@@ -17,9 +18,9 @@ def pysr_fit(X,y):
         # ),
         timeout_in_seconds=60 * 60 * 24,
         # ^ Alternatively, stop after 24 hours have passed.
-        maxsize=7,
+        maxsize=30,
         # ^ Allow greater complexity.
-        maxdepth=3,
+        maxdepth=30,
         # ^ But, avoid deep nesting.
         binary_operators=["*","/","+","-"],
         #, "A(x,y) = (abs(x+y))^(2/3)"
@@ -29,9 +30,9 @@ def pysr_fit(X,y):
         #     "square",       
         #     # ^ Custom operator (julia syntax)"square","cbrt",
         # ],
-        #unary_operators=["sin", "cos", "sqrt"],
+        unary_operators=["sin", "cos", "sqrt"],
         #unary_operators=["square", "cube","exp","sin","square","log","sqrt"],
-        unary_operators=["square", "cube","exp","sin","cos","tan","tanh","log","sqrt"],
+        #unary_operators=["square", "cube","exp","sin","square","tan","tanh","log","sqrt"],
         # constraints={"/": (5,3),
         #               "square": 3,
         #               "sin": 3

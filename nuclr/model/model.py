@@ -7,7 +7,7 @@ import warnings
 from typing import Callable, Optional, List
 
 from nuclr.model.modules import ResidualBlock
-from nuclr.data import Data
+from data import Data
 from monotonicnetworks.functional import direct_norm
 from .modules import PeriodicEmbedding
 from .RNN import RNN

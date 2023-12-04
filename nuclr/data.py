@@ -9,7 +9,7 @@ import torch
 import argparse
 import warnings
 from collections import namedtuple, OrderedDict
-from lib.config_utils import DATA_DIR
+from config_utils import DATA_DIR
 
 def delta(Z, N):
     A = Z + N
